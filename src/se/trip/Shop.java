@@ -12,13 +12,14 @@ public class Shop {
     static final int PEACH = 1;
     static final int PEARS = 2;
     static final int NO_FRUITS = 3;
+    String[] fruitList = new String[]{"CHERRIES", "PEACH", "PEARS"};
 
     ArrayList<FruitBasket> baskets = new ArrayList<>();
 
     Shop() {
         Random random = new Random();
         for (int i = 0; i < NO_FRUITS; i++) {
-            baskets.add(new FruitBasket(random.nextBoolean(), random.nextInt(MAX_PRICE)));
+            baskets.add(new FruitBasket(random.nextBoolean(), random.nextInt(MAX_PRICE), fruitList[i]));
         }
         System.out.println(this);
     }
@@ -37,18 +38,17 @@ public class Shop {
 
     int getMinPriceForPearsPlusOne() {
         int sum = baskets.get(PEARS).price;
-        sum = sum + Math.min(baskets.get(CHERRIES).price, baskets.get(PEACH).price);
+        sum = sum + (baskets.get(CHERRIES).cheapest(baskets.get(PEACH))).price;
         return sum;
     }
 
     String shop() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Pear, ");
-        if (baskets.get(CHERRIES).price < baskets.get(PEACH).price) {
-            sb.append("Cherries");
-        } else {
-            sb.append("Peach");
-        }
+        sb.append(baskets.get(PEARS)).append(", ");
+        baskets.get(PEARS).stock = false;
+        FruitBasket basket = baskets.get(CHERRIES).cheapest(baskets.get(PEACH));
+        sb.append(basket);
+        basket.stock = false;
         return sb.toString();
     }
 

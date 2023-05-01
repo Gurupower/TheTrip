@@ -17,15 +17,19 @@ public class World {
     int findCheapestShop() {
         int lowestPrice = Integer.MAX_VALUE;
         int index = -1;
+        int shopsAvailable = 0;
         for (int i = 0; i < shops.size(); i++) {
             Shop s = shops.get(i);
-            if (s.hasStock() && shops.get(i).getMinPriceForPearsPlusOne() < lowestPrice) {
-                lowestPrice = shops.get(i).getMinPriceForPearsPlusOne();
-                index = i;
+            if (s.hasStock()) {
+                shopsAvailable++;
+                if (shops.get(i).getMinPriceForPearsPlusOne() < lowestPrice) {
+                    lowestPrice = shops.get(i).getMinPriceForPearsPlusOne();
+                    index = i;
+                }
             }
         }
         String fruits = shops.get(index).shop();
-        System.out.printf("Cheapest shop is number %d, price %d %s\n", index + 1, lowestPrice, fruits);
+        System.out.printf("Cheapest shop is number %d, price %d with the fruits %s, total shops with stock was %d\n", index + 1, lowestPrice, fruits, shopsAvailable);
         return index;
     }
 }

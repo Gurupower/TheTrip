@@ -3,6 +3,7 @@ package se.trip;
 public class Trip {
 
     World world;
+
     Trip(World w) {
         world = w;
     }
@@ -11,7 +12,7 @@ public class Trip {
         world.init();
     }
 
-    int go() {
-        return world.findCheapestShop();
+    int go(String name) {
+        return world.findCheapestShop(name);
     }
 }

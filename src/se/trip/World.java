@@ -14,7 +14,7 @@ public class World {
         }
     }
 
-    int findCheapestShop() {
+    int findCheapestShop(String name) {
         int lowestPrice = Integer.MAX_VALUE;
         int index = -1;
         int shopsAvailable = 0;
@@ -29,7 +29,8 @@ public class World {
             }
         }
         String fruits = shops.get(index).shop();
-        System.out.printf("Cheapest shop is number %d, price %d with the fruits %s, total shops with stock was %d\n", index + 1, lowestPrice, fruits, shopsAvailable);
+        System.out.printf(name + " Road Trip. \n");
+        System.out.printf("The cheapest shop is number %d, price %d with the fruits %s, total shops with stock was %d\n", index + 1, lowestPrice, fruits, shopsAvailable);
         return index;
     }
 }

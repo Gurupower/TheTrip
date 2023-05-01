@@ -10,7 +10,9 @@ public class Main {
         Trip trip = new Trip(world);
 
         trip.initTrip();
-        int shop = trip.go();
-        System.out.printf("Did we shop: %s", shop >= 0 ? "Yes" : "No");
+        int shop = trip.go("Pelle & Kajsa");
+        System.out.printf("Did we shop: %s\n", shop >= 0 ? "Yes" : "No");
+        shop = trip.go("Kalle is a friend");
+        System.out.printf("Did we shop: %s\n", shop >= 0 ? "Yes" : "No");
     }
 }

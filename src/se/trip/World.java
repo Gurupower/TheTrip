@@ -18,8 +18,9 @@ public class World {
         int lowestPrice = Integer.MAX_VALUE;
         int index = -1;
         for (int i = 0; i < shops.size(); i++) {
-            if (shops.get(i).getPrice() < lowestPrice) {
-                lowestPrice = shops.get(i).getPrice();
+            Shop s = shops.get(i);
+            if (s.hasStock() && shops.get(i).getMinPriceForPearsPlusOne() < lowestPrice) {
+                lowestPrice = shops.get(i).getMinPriceForPearsPlusOne();
                 index = i;
             }
         }

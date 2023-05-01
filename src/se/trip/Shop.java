@@ -1,7 +1,5 @@
 package se.trip;
 
-import se.trip.FruitBasket;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,20 +10,24 @@ public class Shop {
     //indexes for fruits
     static final int CHERRIES = 0;
     static final int PEACH = 1;
-    static final int NO_FRUITS = 2;
+    static final int PEARS = 2;
+    static final int NO_FRUITS = 3;
 
-    boolean stock = true;
     ArrayList<FruitBasket> baskets = new ArrayList<>();
 
     Shop() {
         Random random = new Random();
         for (int i = 0; i < NO_FRUITS; i++) {
-            baskets.add(new FruitBasket(true, random.nextInt(MAX_PRICE)));
+            baskets.add(new FruitBasket(random.nextBoolean(), random.nextInt(MAX_PRICE)));
         }
         System.out.println(this);
     }
 
-    int getPrice() {
+    boolean hasStock() {
+        return (baskets.get(PEARS).stock && baskets.get(CHERRIES).stock || baskets.get(PEACH).stock);
+    }
+
+    int getTotalPrice() {
         int sum = 0;
         for (int i = 0; i < NO_FRUITS; i++) {
             sum = sum + baskets.get(i).price;
@@ -33,14 +35,21 @@ public class Shop {
         return sum;
     }
 
+    int getMinPriceForPearsPlusOne() {
+        int sum = baskets.get(PEARS).price;
+        sum = sum + Math.min(baskets.get(CHERRIES).price, baskets.get(PEACH).price);
+        return sum;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Shop - ");
+        sb.append("Shop - has Stock: ").append(hasStock() ? "Yes" : "No");
         for (FruitBasket fb : baskets) {
             sb.append(" Prices: ").append(fb.price);
         }
-        sb.append(" Total: ").append(getPrice());
+        sb.append(" Pear + One: ").append(getMinPriceForPearsPlusOne());
+        sb.append(" Total: ").append(getTotalPrice());
         return sb.toString();
     }
 }

@@ -24,8 +24,8 @@ public class World {
                 index = i;
             }
         }
-
-        System.out.printf("Cheapest shop is number %d, price %d\n", index + 1, lowestPrice);
+        String fruits = shops.get(index).shop();
+        System.out.printf("Cheapest shop is number %d, price %d %s\n", index + 1, lowestPrice, fruits);
         return index;
     }
 }

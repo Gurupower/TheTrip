@@ -41,6 +41,17 @@ public class Shop {
         return sum;
     }
 
+    String shop() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pear, ");
+        if (baskets.get(CHERRIES).price < baskets.get(PEACH).price) {
+            sb.append("Cherries");
+        } else {
+            sb.append("Peach");
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
